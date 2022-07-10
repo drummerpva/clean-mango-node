@@ -1,6 +1,10 @@
 import { AddAccount } from "../../../domain/usecases/AddAccount";
 import { MissingParamError, InvalidParamError } from "../../errors";
-import { badRequest, serverError } from "../../helpers/http-helper";
+import {
+  badRequest,
+  callSuccess,
+  serverError,
+} from "../../helpers/http-helper";
 import { EmailValidator, HttpRequest, HttpResponse } from "./signup-protocols";
 
 export default class SignUpController {
@@ -26,10 +30,7 @@ export default class SignUpController {
       if (!this.emailValidator.isValid(email))
         return badRequest(new InvalidParamError("email"));
       const account = await this.addAccount.add({ name, email, password });
-      return {
-        statusCode: 201,
-        body: account,
-      };
+      return callSuccess(account);
     } catch (error) {
       return serverError();
     }
