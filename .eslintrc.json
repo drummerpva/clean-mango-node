@@ -10,7 +10,7 @@
     "ecmaVersion": "latest",
     "sourceType": "module"
   },
-  "ignorePatterns": ["**/test/**.*.ts"],
+  "ignorePatterns": ["**/*.spec.ts", "**/*.test.ts"],
   "plugins": ["@typescript-eslint"],
   "rules": {
     "@typescript-eslint/no-explicit-any": "off"
