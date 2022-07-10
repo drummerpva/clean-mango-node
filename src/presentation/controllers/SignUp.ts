@@ -1,10 +1,14 @@
+import { AddAccount } from "../../domain/usecases/AddAccount";
 import { MissingParamError, InvalidParamError } from "../errors";
 import { badRequest, serverError } from "../helpers/http-helper";
 import { EmailValidator } from "../protocols/EmailValidator";
 import { HttpRequest, HttpResponse } from "../protocols/http";
 
 export default class SignUpController {
-  constructor(private emailValidator: EmailValidator) {}
+  constructor(
+    private emailValidator: EmailValidator,
+    private addAccount: AddAccount
+  ) {}
   async handle(httpRequest: HttpRequest): Promise<HttpResponse> {
     try {
       const requiredFields = [
@@ -17,17 +21,17 @@ export default class SignUpController {
         if (!httpRequest.body[field])
           return badRequest(new MissingParamError(field));
       }
-      const { email, password, passwordConfirmation } = httpRequest.body;
+      const { name, email, password, passwordConfirmation } = httpRequest.body;
       if (password !== passwordConfirmation)
         return badRequest(new InvalidParamError("passwordConfirmation"));
       if (!this.emailValidator.isValid(email))
         return badRequest(new InvalidParamError("email"));
+      await this.addAccount.add({ name, email, password });
+      return {
+        statusCode: 201,
+      };
     } catch (error) {
       return serverError();
     }
-
-    return {
-      statusCode: 201,
-    };
   }
 }

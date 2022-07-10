@@ -1,3 +1,8 @@
+import { AccountModel } from "../../../src/domain/models/Account";
+import {
+  AddAccount,
+  AddAccountModel,
+} from "../../../src/domain/usecases/AddAccount";
 import SignUpController from "../../../src/presentation/controllers/SignUp";
 import {
   InvalidParamError,
@@ -7,6 +12,7 @@ import {
 import { EmailValidator } from "../../../src/presentation/protocols";
 
 type SutType = {
+  addAccountStub: AddAccount;
   emailValidatorStub: EmailValidator;
   sut: SignUpController;
 };
@@ -19,12 +25,28 @@ const makeEmailValidator = (): EmailValidator => {
   }
   return new EmailValidatorStub();
 };
+const makeAddAccount = (): AddAccount => {
+  class AddAccountStub implements AddAccount {
+    async add(account: AddAccountModel): Promise<AccountModel> {
+      const fakeAccount = {
+        id: "valid_id",
+        name: "valid_name",
+        email: "valid_email@mail.com",
+        password: "valid_password",
+      };
+      return fakeAccount;
+    }
+  }
+  return new AddAccountStub();
+};
 const makeSut = (): SutType => {
   const emailValidatorStub = makeEmailValidator();
-  const sut = new SignUpController(emailValidatorStub);
+  const addAccountStub = makeAddAccount();
+  const sut = new SignUpController(emailValidatorStub, addAccountStub);
   return {
     emailValidatorStub,
     sut,
+    addAccountStub,
   };
 };
 
@@ -144,5 +166,23 @@ describe("SignUp Controller", () => {
     const httpResponse = await sut.handle(httpRequest);
     expect(httpResponse.statusCode).toBe(500);
     expect(httpResponse.body).toEqual(new ServerError());
+  });
+  test("Should call AddAccount with correct values", async () => {
+    const { sut, addAccountStub } = makeSut();
+    const addSpy = jest.spyOn(addAccountStub, "add");
+    const httpRequest = {
+      body: {
+        name: "any_name",
+        email: "any@mail.com",
+        password: "any_password",
+        passwordConfirmation: "any_password",
+      },
+    };
+    await sut.handle(httpRequest);
+    expect(addSpy).toHaveBeenCalledWith({
+      name: "any_name",
+      email: "any@mail.com",
+      password: "any_password",
+    });
   });
 });
