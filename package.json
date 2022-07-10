@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest --passWithNoTests",
-    "test:w": "jest --watch"
+    "test": "jest --passWithNoTests --noStackTrace",
+    "test:w": "npm t -- --silent --watch",
+    "test:wv": "npm t -- --watch"
   },
   "keywords": [],
   "author": "",
