@@ -1,15 +1,15 @@
-import { AccountModel } from "../../../src/domain/models/Account";
+import SignUpController from "../../../../src/presentation/controllers/signup/SignUp";
 import {
+  AccountModel,
   AddAccount,
   AddAccountModel,
-} from "../../../src/domain/usecases/AddAccount";
-import SignUpController from "../../../src/presentation/controllers/SignUp";
+  EmailValidator,
+} from "../../../../src/presentation/controllers/signup/signup-protocols";
 import {
   InvalidParamError,
   MissingParamError,
   ServerError,
-} from "../../../src/presentation/errors";
-import { EmailValidator } from "../../../src/presentation/protocols";
+} from "../../../../src/presentation/errors";
 
 type SutType = {
   addAccountStub: AddAccount;
