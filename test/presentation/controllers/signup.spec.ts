@@ -1,20 +1,26 @@
 import SignUpController from "../../../src/presentation/controllers/SignUp";
-import InvalidParamError from "../../../src/presentation/errors/InvalidParamError";
-import MissingParamError from "../../../src/presentation/errors/MissingParamError";
-import ServerError from "../../../src/presentation/errors/ServerError";
-import { EmailValidator } from "../../../src/presentation/protocols/EmailValidator";
+import {
+  InvalidParamError,
+  MissingParamError,
+  ServerError,
+} from "../../../src/presentation/errors";
+import { EmailValidator } from "../../../src/presentation/protocols";
 
 type SutType = {
   emailValidatorStub: EmailValidator;
   sut: SignUpController;
 };
-const makeSut = (): SutType => {
+
+const makeEmailValidator = (): EmailValidator => {
   class EmailValidatorStub implements EmailValidator {
     isValid(email: string): boolean {
       return true;
     }
   }
-  const emailValidatorStub = new EmailValidatorStub();
+  return new EmailValidatorStub();
+};
+const makeSut = (): SutType => {
+  const emailValidatorStub = makeEmailValidator();
   const sut = new SignUpController(emailValidatorStub);
   return {
     emailValidatorStub,
@@ -108,7 +114,7 @@ describe("SignUp Controller", () => {
   });
   test("Should return 500 if EmailValidator throws", async () => {
     const { sut, emailValidatorStub } = makeSut();
-    jest.spyOn(emailValidatorStub, "isValid").mockImplementation(() => {
+    jest.spyOn(emailValidatorStub, "isValid").mockImplementationOnce(() => {
       throw new Error();
     });
     const httpRequest = {
