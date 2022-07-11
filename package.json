@@ -5,13 +5,20 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon src/main/server.ts",
-    "test": "jest --passWithNoTests --noStackTrace",
+    "test": "jest --passWithNoTests --noStackTrace --runInBand",
     "test:w": "npm t -- --silent --watch",
-    "test:wv": "npm t -- --watch"
+    "test:wv": "npm t -- --watch",
+    "test:cov": "npm t -- --coverage"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "nodemonConfig": {
+    "ignore": [
+      "test/*",
+      "globalConfig.json"
+    ]
+  },
   "devDependencies": {
     "@shelf/jest-mongodb": "^3.0.2",
     "@types/bcrypt": "^5.0.0",

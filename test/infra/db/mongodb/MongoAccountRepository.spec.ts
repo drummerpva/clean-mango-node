@@ -3,7 +3,7 @@ import { MongoHelper } from "../../../../src/infra/db/mongodb/helpers/mongo-help
 import { MongoAccountRepository } from "../../../../src/infra/db/mongodb/MongoAccountRepository";
 
 const makeSut = (accountCollection: Collection) => {
-  const sut = new MongoAccountRepository(accountCollection);
+  const sut = new MongoAccountRepository();
   return {
     sut,
   };
@@ -13,14 +13,14 @@ describe("MongoAccountRepository", () => {
     await MongoHelper.connect(process.env.MONGO_URL!);
   });
   beforeEach(async () => {
-    const accountCollection = MongoHelper.getCollection("accounts");
+    const accountCollection = await MongoHelper.getCollection("accounts");
     await accountCollection.deleteMany({});
   });
   afterAll(async () => {
     await MongoHelper.disconnect();
   });
   test("Should return an Account on success", async () => {
-    const accountCollection = MongoHelper.getCollection("accounts");
+    const accountCollection = await MongoHelper.getCollection("accounts");
     const { sut } = makeSut(accountCollection);
     const account = await sut.add({
       name: "any_name",
