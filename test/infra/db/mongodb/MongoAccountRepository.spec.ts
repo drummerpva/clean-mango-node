@@ -1,9 +1,9 @@
-import { MongoClient } from "mongodb";
+import { Collection } from "mongodb";
 import { MongoHelper } from "../../../../src/infra/db/mongodb/helpers/mongo-helper";
 import { MongoAccountRepository } from "../../../../src/infra/db/mongodb/MongoAccountRepository";
 
-const makeSut = (mongoClient: MongoClient) => {
-  const sut = new MongoAccountRepository(mongoClient);
+const makeSut = (accountCollection: Collection) => {
+  const sut = new MongoAccountRepository(accountCollection);
   return {
     sut,
   };
@@ -15,8 +15,9 @@ describe("MongoAccountRepository", () => {
   afterAll(async () => {
     await MongoHelper.disconnect();
   });
-  test("Should return and Account on success", async () => {
-    const { sut } = makeSut(MongoHelper.client);
+  test("Should return an Account on success", async () => {
+    const accountCollection = MongoHelper.getCollection("accounts");
+    const { sut } = makeSut(accountCollection);
     const account = await sut.add({
       name: "any_name",
       email: "any_email@mail.com",
