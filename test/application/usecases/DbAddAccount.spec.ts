@@ -84,4 +84,19 @@ describe("DbAddAccount UseCase", () => {
       password: "hashed_password",
     });
   });
+  test("Should throw if Encrypter throws", async () => {
+    const { addAccountRepositoryStub, sut } = makeSut();
+    jest
+      .spyOn(addAccountRepositoryStub, "add")
+      .mockImplementationOnce(async () => {
+        return Promise.reject(new Error());
+      });
+    const accountData = {
+      name: "valid_name",
+      email: "valid_email",
+      password: "valid_password",
+    };
+    const promise = sut.add(accountData);
+    expect(promise).rejects.toThrow();
+  });
 });
