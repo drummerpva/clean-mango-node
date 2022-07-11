@@ -1,4 +1,4 @@
-import bcrypt, { hash } from "bcrypt";
+import bcrypt from "bcrypt";
 import { BCryptAdapter } from "../../src/infra/crypto/BCryptAdapter";
 
 type SutTypes = {
@@ -16,5 +16,15 @@ describe("BCryptAdapter", () => {
     const hashSpy = jest.spyOn(bcrypt, "hash");
     await sut.encrypt("any_value");
     expect(hashSpy).toHaveBeenCalledWith("any_value", salt);
+  });
+
+  test("Should return hashed value on success", async () => {
+    const salt = 10;
+    const { sut } = makeSut(salt);
+    jest
+      .spyOn(bcrypt, "hash")
+      .mockImplementationOnce(async () => Promise.resolve("hashed_value"));
+    const hashedValue = await sut.encrypt("any_value");
+    expect(hashedValue).toBe("hashed_value");
   });
 });
