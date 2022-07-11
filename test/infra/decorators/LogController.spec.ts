@@ -1,10 +1,18 @@
+import { LogErrorRepository } from "../../../src/application/protocols/LogErrorRepository";
 import { LogControllerDecorator } from "../../../src/main/decorators/LogController";
+import { serverError } from "../../../src/presentation/helpers/http-helper";
 import {
   Controller,
   HttpRequest,
   HttpResponse,
 } from "../../../src/presentation/protocols";
 
+const makeLogErrorRepositorytub = () => {
+  class LogErrorRepositoryStub implements LogErrorRepository {
+    async log(stackError: string): Promise<void> {}
+  }
+  return new LogErrorRepositoryStub();
+};
 const makeControllerStub = () => {
   class ControllerStub implements Controller {
     async handle(httpRequest: HttpRequest): Promise<HttpResponse> {
@@ -24,9 +32,13 @@ const makeControllerStub = () => {
 
 const makeSut = () => {
   const controllerStub = makeControllerStub();
-  const sut = new LogControllerDecorator(controllerStub);
+  const logErrorRepositoryStub = makeLogErrorRepositorytub();
+  const sut = new LogControllerDecorator(
+    controllerStub,
+    logErrorRepositoryStub
+  );
 
-  return { sut, controllerStub };
+  return { sut, controllerStub, logErrorRepositoryStub };
 };
 
 describe("LogControllerDecorator", () => {
@@ -57,5 +69,25 @@ describe("LogControllerDecorator", () => {
     const account = await sut.handle(httpRequest);
     expect(account.statusCode).toBe(201);
     expect(account.body.name).toBe("any_name");
+  });
+  test("Should call LogErrorRepository with correct error if controller returns a server error", async () => {
+    const { sut, controllerStub, logErrorRepositoryStub } = makeSut();
+    const fakeError = new Error();
+    fakeError.stack = "any_stack";
+    const error = serverError(fakeError);
+    jest
+      .spyOn(controllerStub, "handle")
+      .mockReturnValueOnce(Promise.resolve(error));
+    const logSpy = jest.spyOn(logErrorRepositoryStub, "log");
+    const httpRequest = {
+      body: {
+        email: "any_email@email.com",
+        name: "any_email",
+        password: "any_password",
+        passwordConfirmation: "any_password",
+      },
+    };
+    await sut.handle(httpRequest);
+    expect(logSpy).toHaveBeenCalledWith("any_stack");
   });
 });
