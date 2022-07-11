@@ -1,4 +1,4 @@
-import { LogErrorRepository } from "../../../src/application/protocols/LogErrorRepository";
+import { LogRepository } from "../../../src/application/protocols/LogErrorRepository";
 import { LogControllerDecorator } from "../../../src/main/decorators/LogController";
 import { serverError } from "../../../src/presentation/helpers/http-helper";
 import {
@@ -8,7 +8,7 @@ import {
 } from "../../../src/presentation/protocols";
 
 const makeLogErrorRepositorytub = () => {
-  class LogErrorRepositoryStub implements LogErrorRepository {
+  class LogErrorRepositoryStub implements LogRepository {
     async log(stackError: string): Promise<void> {}
   }
   return new LogErrorRepositoryStub();
