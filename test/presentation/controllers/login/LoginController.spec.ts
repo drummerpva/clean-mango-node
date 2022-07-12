@@ -6,6 +6,7 @@ import {
 } from "../../../../src/presentation/errors";
 import {
   badRequest,
+  callSuccess,
   serverError,
 } from "../../../../src/presentation/helpers/http-helper";
 import { EmailValidator } from "../../../../src/presentation/protocols/EmailValidator";
@@ -21,7 +22,7 @@ const makeEmailValidator = () => {
 const makeAtuthentication = () => {
   class AuthenticationStub implements Authentication {
     async auth(email: string, password: string): Promise<string> {
-      return "jwt_token";
+      return "any_token";
     }
   }
   return new AuthenticationStub();
@@ -102,5 +103,11 @@ describe("LoginController", () => {
     const httpRequest = makeFakeRequest();
     const response = await sut.handle(httpRequest);
     expect(response).toEqual(serverError(new Error()));
+  });
+  test("Should return a token on success", async () => {
+    const { sut, authenticationStub } = makeSut();
+    const httpRequest = makeFakeRequest();
+    const response = await sut.handle(httpRequest);
+    expect(response).toEqual(callSuccess("any_token"));
   });
 });

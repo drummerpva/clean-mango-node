@@ -23,8 +23,8 @@ export class LoginController implements Controller {
       const { email, password } = httpRequest.body;
       const isValidEmail = this.emailValidator.isValid(email);
       if (!isValidEmail) return badRequest(new InvalidParamError("email"));
-      await this.authentication.auth(email, password);
-      return callSuccess({});
+      const token = await this.authentication.auth(email, password);
+      return callSuccess(token);
     } catch (error) {
       return serverError(error as Error);
     }
