@@ -1,6 +1,6 @@
-import { LoginController } from "../../../src/presentation/controllers/login/LoginController";
-import { MissingParamError } from "../../../src/presentation/errors";
-import { badRequest } from "../../../src/presentation/helpers/http-helper";
+import { LoginController } from "../../../../src/presentation/controllers/login/LoginController";
+import { MissingParamError } from "../../../../src/presentation/errors";
+import { badRequest } from "../../../../src/presentation/helpers/http-helper";
 
 const makeSut = () => {
   const sut = new LoginController();
