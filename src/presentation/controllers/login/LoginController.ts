@@ -26,7 +26,7 @@ export class LoginController implements Controller {
       if (!isValidEmail) return badRequest(new InvalidParamError("email"));
       const token = await this.authentication.auth(email, password);
       if (!token) return unathorized();
-      return callSuccess(token);
+      return callSuccess({ accessToken: token });
     } catch (error) {
       return serverError(error as Error);
     }

@@ -22,11 +22,8 @@ const makeEmailValidator = () => {
 };
 const makeAtuthentication = () => {
   class AuthenticationStub implements Authentication {
-    async auth(
-      email: string,
-      password: string
-    ): Promise<Authentication.Output> {
-      return { accessToken: "any_token" };
+    async auth(email: string, password: string): Promise<string> {
+      return "any_token";
     }
   }
   return new AuthenticationStub();
@@ -102,7 +99,7 @@ describe("LoginController", () => {
   test("Should return 401 if invalid credential are provided", async () => {
     const { sut, authenticationStub } = makeSut();
     jest.spyOn(authenticationStub, "auth").mockImplementationOnce(async () => {
-      return null as unknown as Authentication.Output;
+      return null as unknown as string;
     });
     const response = await sut.handle(makeFakeRequest());
     expect(response).toEqual(unathorized());
