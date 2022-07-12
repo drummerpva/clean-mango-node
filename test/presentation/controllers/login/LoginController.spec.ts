@@ -94,4 +94,13 @@ describe("LoginController", () => {
       httpRequest.body.password
     );
   });
+  test("Should return 500 if Authentication throws", async () => {
+    const { sut, authenticationStub } = makeSut();
+    jest.spyOn(authenticationStub, "auth").mockImplementationOnce(async () => {
+      throw new Error();
+    });
+    const httpRequest = makeFakeRequest();
+    const response = await sut.handle(httpRequest);
+    expect(response).toEqual(serverError(new Error()));
+  });
 });
