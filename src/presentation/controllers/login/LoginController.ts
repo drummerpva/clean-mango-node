@@ -4,6 +4,7 @@ import {
   badRequest,
   callSuccess,
   serverError,
+  unathorized,
 } from "../../helpers/http-helper";
 import { Controller, HttpRequest, HttpResponse } from "../../protocols";
 import { EmailValidator } from "../signup/signup-protocols";
@@ -24,6 +25,7 @@ export class LoginController implements Controller {
       const isValidEmail = this.emailValidator.isValid(email);
       if (!isValidEmail) return badRequest(new InvalidParamError("email"));
       const token = await this.authentication.auth(email, password);
+      if (!token) return unathorized();
       return callSuccess(token);
     } catch (error) {
       return serverError(error as Error);

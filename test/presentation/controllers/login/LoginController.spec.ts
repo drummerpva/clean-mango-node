@@ -8,6 +8,7 @@ import {
   badRequest,
   callSuccess,
   serverError,
+  unathorized,
 } from "../../../../src/presentation/helpers/http-helper";
 import { EmailValidator } from "../../../../src/presentation/protocols/EmailValidator";
 
@@ -95,17 +96,24 @@ describe("LoginController", () => {
       httpRequest.body.password
     );
   });
+  test("Should return 401 if invalid credential are provided", async () => {
+    const { sut, authenticationStub } = makeSut();
+    jest.spyOn(authenticationStub, "auth").mockImplementationOnce(async () => {
+      return null as unknown as string;
+    });
+    const response = await sut.handle(makeFakeRequest());
+    expect(response).toEqual(unathorized());
+  });
   test("Should return 500 if Authentication throws", async () => {
     const { sut, authenticationStub } = makeSut();
     jest.spyOn(authenticationStub, "auth").mockImplementationOnce(async () => {
       throw new Error();
     });
-    const httpRequest = makeFakeRequest();
-    const response = await sut.handle(httpRequest);
+    const response = await sut.handle(makeFakeRequest());
     expect(response).toEqual(serverError(new Error()));
   });
   test("Should return a token on success", async () => {
-    const { sut, authenticationStub } = makeSut();
+    const { sut } = makeSut();
     const httpRequest = makeFakeRequest();
     const response = await sut.handle(httpRequest);
     expect(response).toEqual(callSuccess("any_token"));
