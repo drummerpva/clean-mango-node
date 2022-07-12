@@ -1,3 +1,4 @@
+import { Authentication } from "../../../../src/domain/usecases/Authentication";
 import { LoginController } from "../../../../src/presentation/controllers/login/LoginController";
 import {
   InvalidParamError,
@@ -17,13 +18,22 @@ const makeEmailValidator = () => {
   }
   return new EmailValidatorStub();
 };
-
+const makeAtuthentication = () => {
+  class AuthenticationStub implements Authentication {
+    async auth(email: string, password: string): Promise<string> {
+      return "jwt_token";
+    }
+  }
+  return new AuthenticationStub();
+};
 const makeSut = () => {
   const emailValidatorStub = makeEmailValidator();
-  const sut = new LoginController(emailValidatorStub);
+  const authenticationStub = makeAtuthentication();
+  const sut = new LoginController(emailValidatorStub, authenticationStub);
   return {
     sut,
     emailValidatorStub,
+    authenticationStub,
   };
 };
 const makeFakeRequest = () => ({
@@ -73,5 +83,15 @@ describe("LoginController", () => {
     });
     const response = await sut.handle(makeFakeRequest());
     expect(response).toEqual(serverError(new Error()));
+  });
+  test("Should call Authentication with correct values", async () => {
+    const { sut, authenticationStub } = makeSut();
+    const authSpy = jest.spyOn(authenticationStub, "auth");
+    const httpRequest = makeFakeRequest();
+    await sut.handle(httpRequest);
+    expect(authSpy).toHaveBeenCalledWith(
+      httpRequest.body.email,
+      httpRequest.body.password
+    );
   });
 });
