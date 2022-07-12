@@ -5,15 +5,18 @@ import {
   callSuccess,
   serverError,
 } from "../../helpers/http-helper";
+import { Validation } from "../../helpers/validator/Validation";
 import { EmailValidator, HttpRequest, HttpResponse } from "./signup-protocols";
 
 export default class SignUpController {
   constructor(
+    private validation: Validation,
     private emailValidator: EmailValidator,
     private addAccount: AddAccount
   ) {}
   async handle(httpRequest: HttpRequest): Promise<HttpResponse> {
     try {
+      this.validation.validate(httpRequest.body);
       const requiredFields = [
         "name",
         "email",
