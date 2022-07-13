@@ -3,7 +3,6 @@ import {
   AccountModel,
   AddAccount,
   AddAccountModel,
-  EmailValidator,
   HttpRequest,
 } from "../../../../src/presentation/controllers/signup/signup-protocols";
 import { MissingParamError } from "../../../../src/presentation/errors";
@@ -16,7 +15,6 @@ import { Validation } from "../../../../src/presentation/helpers/validator/Valid
 
 type SutType = {
   addAccountStub: AddAccount;
-  emailValidatorStub: EmailValidator;
   validationStub: Validation;
   sut: SignUpController;
 };
@@ -29,14 +27,6 @@ const makeValidation = (): Validation => {
   }
   return new ValidationStub();
 };
-const makeEmailValidator = (): EmailValidator => {
-  class EmailValidatorStub implements EmailValidator {
-    isValid(email: string): boolean {
-      return true;
-    }
-  }
-  return new EmailValidatorStub();
-};
 const makeAddAccount = (): AddAccount => {
   class AddAccountStub implements AddAccount {
     async add(account: AddAccountModel): Promise<AccountModel> {
@@ -46,12 +36,10 @@ const makeAddAccount = (): AddAccount => {
   return new AddAccountStub();
 };
 const makeSut = (): SutType => {
-  const emailValidatorStub = makeEmailValidator();
   const addAccountStub = makeAddAccount();
   const validationStub = makeValidation();
   const sut = new SignUpController(validationStub, addAccountStub);
   return {
-    emailValidatorStub,
     sut,
     addAccountStub,
     validationStub,
