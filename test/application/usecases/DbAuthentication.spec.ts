@@ -1,6 +1,5 @@
 import { DbAuthentication } from "../../../src/application/usecases/DbAuthentication";
 import { AccountModel } from "../../../src/domain/models/Account";
-import { Authentication } from "../../../src/domain/usecases/Authentication";
 const makeFakeAccount = (): AccountModel => ({
   id: "valid_id",
   name: "valid_name",
@@ -40,5 +39,14 @@ describe("DbAuthentication", () => {
     const input = makeFakeInput();
     await sut.auth(input);
     expect(getAccountByEmailSpy).toHaveBeenCalledWith(input.email);
+  });
+  test("Shoul return null with no account found", async () => {
+    const { sut, loadAccountByEmailRepository } = makeSut();
+    jest
+      .spyOn(loadAccountByEmailRepository, "getAccountByEmail")
+      .mockImplementationOnce(async () => null as unknown as AccountModel);
+    const input = makeFakeInput();
+    const response = await sut.auth(input);
+    expect(response).toBeFalsy();
   });
 });
