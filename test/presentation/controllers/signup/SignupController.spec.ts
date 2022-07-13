@@ -11,7 +11,7 @@ import {
   callSuccess,
   serverError,
 } from "../../../../src/presentation/helpers/http/http-helper";
-import { Validation } from "../../../../src/presentation/helpers/validator/Validation";
+import { Validation } from "../../../../src/presentation/protocols/Validation";
 
 type SutType = {
   addAccountStub: AddAccount;

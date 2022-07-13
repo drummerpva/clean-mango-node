@@ -5,7 +5,7 @@ import {
   serverError,
   unathorized,
 } from "../../helpers/http/http-helper";
-import { Validation } from "../../helpers/validator/Validation";
+import { Validation } from "../../protocols/Validation";
 import { Controller, HttpRequest, HttpResponse } from "../../protocols";
 
 export class LoginController implements Controller {

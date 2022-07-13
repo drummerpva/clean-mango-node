@@ -5,7 +5,7 @@ import {
   callSuccess,
   serverError,
 } from "../../helpers/http/http-helper";
-import { Validation } from "../../helpers/validator/Validation";
+import { Validation } from "../../protocols/Validation";
 import { HttpRequest, HttpResponse } from "./signup-protocols";
 
 export default class SignUpController {

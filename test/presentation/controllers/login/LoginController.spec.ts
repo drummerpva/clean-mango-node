@@ -7,7 +7,7 @@ import {
   serverError,
   unathorized,
 } from "../../../../src/presentation/helpers/http/http-helper";
-import { Validation } from "../../../../src/presentation/helpers/validator/Validation";
+import { Validation } from "../../../../src/presentation/protocols/Validation";
 
 const makeValidation = () => {
   class ValidationStub implements Validation {
