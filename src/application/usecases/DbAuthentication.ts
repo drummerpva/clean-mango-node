@@ -13,7 +13,10 @@ export class DbAuthentication implements Authentication {
       email
     );
     if (!account) return null as unknown as string;
-    const isPasswordEqual = await this.hashComparer.compare(password);
+    const isPasswordEqual = await this.hashComparer.compare(
+      password,
+      account.password
+    );
     if (!isPasswordEqual) return null as unknown as string;
     return null as unknown as string;
   }

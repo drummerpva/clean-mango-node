@@ -24,7 +24,7 @@ const makeLoadAccountByEmailRepository = () => {
 };
 const makeHashComparer = () => {
   class HashComparerStub implements HashComparer {
-    async compare(value: string): Promise<boolean> {
+    async compare(value: string, valueToCompare: string): Promise<boolean> {
       return true;
     }
   }
@@ -75,12 +75,16 @@ describe("DbAuthentication", () => {
     const promise = sut.auth(makeFakeInput());
     expect(promise).rejects.toThrow();
   });
-  test("Shoul call HashComparer with correct password", async () => {
-    const { sut, hashComparerStub } = makeSut();
+  test("Shoul call HashComparer with correct values", async () => {
+    const { sut, hashComparerStub, loadAccountByEmailRepositoryStub } =
+      makeSut();
     const compareSpy = jest.spyOn(hashComparerStub, "compare");
     const input = makeFakeInput();
+    const account = await loadAccountByEmailRepositoryStub.getAccountByEmail(
+      "any_email"
+    );
     await sut.auth(input);
-    expect(compareSpy).toHaveBeenCalledWith(input.password);
+    expect(compareSpy).toHaveBeenCalledWith(input.password, account.password);
   });
   test("Shoul throw if HashComparer throws", async () => {
     const { sut, hashComparerStub } = makeSut();
