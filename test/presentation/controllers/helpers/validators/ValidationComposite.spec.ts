@@ -11,17 +11,28 @@ const makeValidationStub = () => {
   return new ValidationStub();
 };
 const makeSut = () => {
-  const validationStub = makeValidationStub();
-  const sut = new ValidationComposite([validationStub]);
-  return { sut, validationStub };
+  const validationStubs = [makeValidationStub(), makeValidationStub()];
+  const sut = new ValidationComposite(validationStubs);
+  return { sut, validationStubs };
 };
 describe("ValidationComposite", () => {
   test("Should return an error if any validation fails", () => {
-    const { sut, validationStub } = makeSut();
+    const { sut, validationStubs } = makeSut();
     jest
-      .spyOn(validationStub, "validate")
+      .spyOn(validationStubs[1], "validate")
       .mockImplementationOnce(() => new MissingParamError("field"));
     const error = sut.validate({ field: "any_value" });
     expect(error).toEqual(new MissingParamError("field"));
+  });
+  test("Should return the first error if more than one validation fails", () => {
+    const { sut, validationStubs } = makeSut();
+    jest
+      .spyOn(validationStubs[0], "validate")
+      .mockImplementationOnce(() => new Error());
+    jest
+      .spyOn(validationStubs[1], "validate")
+      .mockImplementationOnce(() => new MissingParamError("field"));
+    const error = sut.validate({ field: "any_value" });
+    expect(error).toEqual(new Error());
   });
 });
