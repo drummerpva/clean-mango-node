@@ -1,7 +1,7 @@
-import { InvalidParamError } from "../../../../../src/presentation/errors";
-import { EmailValidation } from "../../../../../src/presentation/helpers/validator/EmailValidation";
-import { HttpRequest } from "../../../../../src/presentation/protocols";
-import { EmailValidator } from "../../../../../src/presentation/protocols/EmailValidator";
+import { InvalidParamError } from "../../../../src/presentation/errors";
+import { EmailValidation } from "../../../../src/presentation/helpers/validator/EmailValidation";
+import { HttpRequest } from "../../../../src/presentation/protocols";
+import { EmailValidator } from "../../../../src/presentation/protocols/EmailValidator";
 
 type SutType = {
   emailValidatorStub: EmailValidator;

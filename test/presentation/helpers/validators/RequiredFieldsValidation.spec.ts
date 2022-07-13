@@ -1,5 +1,5 @@
-import { MissingParamError } from "../../../../../src/presentation/errors";
-import { RequiredFieldValidation } from "../../../../../src/presentation/helpers/validator/RequiredFIeldValidation";
+import { MissingParamError } from "../../../../src/presentation/errors";
+import { RequiredFieldValidation } from "../../../../src/presentation/helpers/validator/RequiredFIeldValidation";
 
 type SutType = {
   sut: RequiredFieldValidation;
