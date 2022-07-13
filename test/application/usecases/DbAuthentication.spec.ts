@@ -145,4 +145,10 @@ describe("DbAuthentication", () => {
     const accessToken = await sut.auth(input);
     expect(accessToken).toBeFalsy();
   });
+  test("Shoul return an accessToken on success", async () => {
+    const { sut } = makeSut();
+    const input = makeFakeInput();
+    const accessToken = await sut.auth(input);
+    expect(accessToken).toBe("token");
+  });
 });
