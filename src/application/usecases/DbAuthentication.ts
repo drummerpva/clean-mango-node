@@ -20,7 +20,7 @@ export class DbAuthentication implements Authentication {
       account.password
     );
     if (!isPasswordEqual) return null as unknown as string;
-    await this.tokenGenerator.generate(account.id);
-    return null as unknown as string;
+    const accessToken = await this.tokenGenerator.generate(account.id);
+    return accessToken;
   }
 }

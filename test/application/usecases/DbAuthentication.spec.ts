@@ -136,4 +136,13 @@ describe("DbAuthentication", () => {
     const response = sut.auth(input);
     expect(response).rejects.toThrow();
   });
+  test("Shoul return null if TokenGenerator not return", async () => {
+    const { sut, tokenGeneratorStub } = makeSut();
+    jest
+      .spyOn(tokenGeneratorStub, "generate")
+      .mockImplementationOnce(async () => null as unknown as string);
+    const input = makeFakeInput();
+    const accessToken = await sut.auth(input);
+    expect(accessToken).toBeFalsy();
+  });
 });
