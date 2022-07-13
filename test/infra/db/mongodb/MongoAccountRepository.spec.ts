@@ -9,11 +9,12 @@ const makeSut = () => {
   };
 };
 describe("MongoAccountRepository", () => {
+  let accountCollection: Collection;
   beforeAll(async () => {
     await MongoHelper.connect(process.env.MONGO_URL!);
   });
   beforeEach(async () => {
-    const accountCollection = await MongoHelper.getCollection("accounts");
+    accountCollection = await MongoHelper.getCollection("accounts");
     await accountCollection.deleteMany({});
   });
   afterAll(async () => {
@@ -45,5 +46,18 @@ describe("MongoAccountRepository", () => {
     expect(account.name).toBe("any_name");
     expect(account.email).toBe("any_email@mail.com");
     expect(account.password).toBe("any_password");
+  });
+  test("Should return an Account on updateTokenById success", async () => {
+    const { sut } = makeSut();
+    const { insertedId } = await accountCollection.insertOne({
+      name: "any_name",
+      email: "any_email@mail.com",
+      password: "any_password",
+    });
+    await sut.updateTokenById(insertedId.toString(), "any_token");
+    const account = await accountCollection.findOne({
+      _id: insertedId,
+    });
+    expect(account?.accessToken).toBe("any_token");
   });
 });
