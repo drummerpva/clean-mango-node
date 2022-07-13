@@ -125,4 +125,15 @@ describe("DbAuthentication", () => {
     await sut.auth(input);
     expect(generateSpy).toHaveBeenCalledWith(account.id);
   });
+  test("Shoul throw if TokenGenerator throw", async () => {
+    const { sut, tokenGeneratorStub } = makeSut();
+    jest
+      .spyOn(tokenGeneratorStub, "generate")
+      .mockImplementationOnce(async () => {
+        throw new Error();
+      });
+    const input = makeFakeInput();
+    const response = sut.auth(input);
+    expect(response).rejects.toThrow();
+  });
 });
