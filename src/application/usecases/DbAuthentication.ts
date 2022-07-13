@@ -10,7 +10,7 @@ export class DbAuthentication implements Authentication {
     const account = await this.loadAccountByEmailRepository.getAccountByEmail(
       email
     );
-    if (!account) return "";
+    if (!account) return null as unknown as string;
     return "email";
   }
 }

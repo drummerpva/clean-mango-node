@@ -6,7 +6,11 @@ const makeFakeAccount = (): AccountModel => ({
   email: "valid_email@mail.com",
   password: "valid_password",
 });
-const makeLoadAccountByEmailRepositoryStub = () => {
+const makeFakeInput = () => ({
+  email: "any_email@email.com",
+  password: "any_password",
+});
+const makeLoadAccountByEmailRepository = () => {
   class LoadAccountByEmailRepository {
     async getAccountByEmail(email: string): Promise<AccountModel> {
       return makeFakeAccount();
@@ -16,24 +20,19 @@ const makeLoadAccountByEmailRepositoryStub = () => {
 };
 
 const makeSut = () => {
-  const loadAccountByEmailRepository = makeLoadAccountByEmailRepositoryStub();
-  const sut = new DbAuthentication(loadAccountByEmailRepository);
+  const loadAccountByEmailRepositoryStub = makeLoadAccountByEmailRepository();
+  const sut = new DbAuthentication(loadAccountByEmailRepositoryStub);
   return {
     sut,
-    loadAccountByEmailRepository,
+    loadAccountByEmailRepositoryStub,
   };
 };
 
-const makeFakeInput = () => ({
-  email: "any_email@email.com",
-  password: "any_password",
-});
-
 describe("DbAuthentication", () => {
   test("Shoul call LoadAccountByEmailRepository with correct email", async () => {
-    const { sut, loadAccountByEmailRepository } = makeSut();
+    const { sut, loadAccountByEmailRepositoryStub } = makeSut();
     const getAccountByEmailSpy = jest.spyOn(
-      loadAccountByEmailRepository,
+      loadAccountByEmailRepositoryStub,
       "getAccountByEmail"
     );
     const input = makeFakeInput();
@@ -41,9 +40,9 @@ describe("DbAuthentication", () => {
     expect(getAccountByEmailSpy).toHaveBeenCalledWith(input.email);
   });
   test("Shoul return null with no account found", async () => {
-    const { sut, loadAccountByEmailRepository } = makeSut();
+    const { sut, loadAccountByEmailRepositoryStub } = makeSut();
     jest
-      .spyOn(loadAccountByEmailRepository, "getAccountByEmail")
+      .spyOn(loadAccountByEmailRepositoryStub, "getAccountByEmail")
       .mockImplementationOnce(async () => null as unknown as AccountModel);
     const input = makeFakeInput();
     const response = await sut.auth(input);
