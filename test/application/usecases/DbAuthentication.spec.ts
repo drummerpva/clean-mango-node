@@ -75,21 +75,19 @@ describe("DbAuthentication", () => {
     const promise = sut.auth(makeFakeInput());
     expect(promise).rejects.toThrow();
   });
-  test("Shoul throw if LoadAccountByEmailRepository throws", async () => {
-    const { sut, loadAccountByEmailRepositoryStub } = makeSut();
-    jest
-      .spyOn(loadAccountByEmailRepositoryStub, "getAccountByEmail")
-      .mockImplementationOnce(async () => {
-        throw new Error();
-      });
-    const promise = sut.auth(makeFakeInput());
-    expect(promise).rejects.toThrow();
-  });
   test("Shoul call HashComparer with correct password", async () => {
     const { sut, hashComparerStub } = makeSut();
     const compareSpy = jest.spyOn(hashComparerStub, "compare");
     const input = makeFakeInput();
     await sut.auth(input);
     expect(compareSpy).toHaveBeenCalledWith(input.password);
+  });
+  test("Shoul throw if HashComparer throws", async () => {
+    const { sut, hashComparerStub } = makeSut();
+    jest.spyOn(hashComparerStub, "compare").mockImplementationOnce(async () => {
+      throw new Error();
+    });
+    const promise = sut.auth(makeFakeInput());
+    expect(promise).rejects.toThrow();
   });
 });
