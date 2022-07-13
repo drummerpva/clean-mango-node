@@ -1,4 +1,4 @@
-import { LogRepository } from "../../../src/application/protocols/LogRepository";
+import { LogRepository } from "../../../src/application/protocols/repository/LogRepository";
 import { AccountModel } from "../../../src/domain/models/Account";
 import { LogControllerDecorator } from "../../../src/main/decorators/LogController";
 import {
