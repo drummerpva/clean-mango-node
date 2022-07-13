@@ -1,9 +1,5 @@
-import {
-  InvalidParamError,
-  MissingParamError,
-} from "../../../../../src/presentation/errors";
+import { MissingParamError } from "../../../../../src/presentation/errors";
 import { RequiredFieldValidation } from "../../../../../src/presentation/helpers/validator/RequiredFIeldValidation";
-import { HttpRequest } from "../../../../../src/presentation/protocols";
 
 type SutType = {
   sut: RequiredFieldValidation;
@@ -21,5 +17,10 @@ describe("EmailValidation", () => {
     const { sut } = makeSut();
     const error = sut.validate({ email: "any_name" });
     expect(error).toEqual(new MissingParamError("field"));
+  });
+  test("Should not return if validation succeds", () => {
+    const { sut } = makeSut();
+    const error = sut.validate({ field: "any_name" });
+    expect(error).toBeFalsy();
   });
 });
