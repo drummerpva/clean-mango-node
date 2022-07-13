@@ -18,7 +18,7 @@ export class LoginController implements Controller {
       const errorValidation = this.validation.validate(httpRequest.body);
       if (errorValidation) return badRequest(errorValidation);
       const { email, password } = httpRequest.body;
-      const token = await this.authentication.auth(email, password);
+      const token = await this.authentication.auth({ email, password });
       if (!token) return unathorized();
       return callSuccess({ accessToken: token });
     } catch (error) {

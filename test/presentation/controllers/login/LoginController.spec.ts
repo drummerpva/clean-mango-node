@@ -19,7 +19,7 @@ const makeValidation = () => {
 };
 const makeAtuthentication = () => {
   class AuthenticationStub implements Authentication {
-    async auth(email: string, password: string): Promise<string> {
+    async auth(input: Authentication.Input): Promise<string> {
       return "any_token";
     }
   }
@@ -47,10 +47,10 @@ describe("LoginController", () => {
     const authSpy = jest.spyOn(authenticationStub, "auth");
     const httpRequest = makeFakeRequest();
     await sut.handle(httpRequest);
-    expect(authSpy).toHaveBeenCalledWith(
-      httpRequest.body.email,
-      httpRequest.body.password
-    );
+    expect(authSpy).toHaveBeenCalledWith({
+      email: httpRequest.body.email,
+      password: httpRequest.body.password,
+    });
   });
   test("Should return 401 if invalid credential are provided", async () => {
     const { sut, authenticationStub } = makeSut();
