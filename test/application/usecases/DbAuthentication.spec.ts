@@ -46,7 +46,6 @@ const makeTokenGenerator = () => {
   }
   return new TokenGeneratorStub();
 };
-
 const makeSut = () => {
   const loadAccountByEmailRepositoryStub = makeLoadAccountByEmailRepository();
   const hashComparerStub = makeHashComparer();
@@ -161,14 +160,25 @@ describe("DbAuthentication", () => {
     const accessToken = await sut.auth(input);
     expect(accessToken).toBe("token");
   });
-  test("Shoul call HashComparer with correct values", async () => {
+  test("Shoul call UpdateAccessTokenRepository with correct values", async () => {
     const { sut, updateAccessTokenRepositoryStub } = makeSut();
     const updateTokenById = jest.spyOn(
       updateAccessTokenRepositoryStub,
       "updateTokenById"
     );
     const input = makeFakeInput();
-    const accessToken = await sut.auth(input);
-    expect(updateTokenById).toHaveBeenCalledWith("valid_id", accessToken);
+    await sut.auth(input);
+    expect(updateTokenById).toHaveBeenCalledWith("valid_id", "token");
+  });
+  test("Shoul throw if UpdateAccessTokenRepository throws", async () => {
+    const { sut, updateAccessTokenRepositoryStub } = makeSut();
+    jest
+      .spyOn(updateAccessTokenRepositoryStub, "updateTokenById")
+      .mockImplementationOnce(async () => {
+        throw new Error();
+      });
+    const input = makeFakeInput();
+    const response = sut.auth(input);
+    expect(response).rejects.toThrow();
   });
 });
