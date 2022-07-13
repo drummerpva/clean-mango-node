@@ -39,7 +39,7 @@ describe("DbAuthentication", () => {
     await sut.auth(input);
     expect(getAccountByEmailSpy).toHaveBeenCalledWith(input.email);
   });
-  test("Shoul return null with no account found", async () => {
+  test("Shoul return null if LoadAccountByEmailRepository no account found", async () => {
     const { sut, loadAccountByEmailRepositoryStub } = makeSut();
     jest
       .spyOn(loadAccountByEmailRepositoryStub, "getAccountByEmail")
@@ -47,5 +47,15 @@ describe("DbAuthentication", () => {
     const input = makeFakeInput();
     const response = await sut.auth(input);
     expect(response).toBeFalsy();
+  });
+  test("Shoul throw if LoadAccountByEmailRepository throws", async () => {
+    const { sut, loadAccountByEmailRepositoryStub } = makeSut();
+    jest
+      .spyOn(loadAccountByEmailRepositoryStub, "getAccountByEmail")
+      .mockImplementationOnce(async () => {
+        throw new Error();
+      });
+    const promise = sut.auth(makeFakeInput());
+    expect(promise).rejects.toThrow();
   });
 });
