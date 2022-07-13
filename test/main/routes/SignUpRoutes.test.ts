@@ -13,7 +13,7 @@ describe("SignUpRoutes", () => {
     await MongoHelper.disconnect();
   });
   test("Shoul return an account on success", async () => {
-    await request(app)
+    const response = await request(app)
       .post("/api/signup")
       .send({
         name: "valid_name",
