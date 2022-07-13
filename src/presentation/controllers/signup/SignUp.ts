@@ -6,23 +6,15 @@ import {
   serverError,
 } from "../../helpers/http-helper";
 import { Validation } from "../../helpers/validator/Validation";
-import { EmailValidator, HttpRequest, HttpResponse } from "./signup-protocols";
+import { HttpRequest, HttpResponse } from "./signup-protocols";
 
 export default class SignUpController {
-  constructor(
-    private validation: Validation,
-    private emailValidator: EmailValidator,
-    private addAccount: AddAccount
-  ) {}
+  constructor(private validation: Validation, private addAccount: AddAccount) {}
   async handle(httpRequest: HttpRequest): Promise<HttpResponse> {
     try {
       const errorValidation = this.validation.validate(httpRequest.body);
       if (errorValidation) return badRequest(errorValidation);
-      const { name, email, password, passwordConfirmation } = httpRequest.body;
-      if (password !== passwordConfirmation)
-        return badRequest(new InvalidParamError("passwordConfirmation"));
-      if (!this.emailValidator.isValid(email))
-        return badRequest(new InvalidParamError("email"));
+      const { name, email, password } = httpRequest.body;
       const account = await this.addAccount.add({ name, email, password });
       return callSuccess(account);
     } catch (error) {
