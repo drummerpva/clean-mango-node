@@ -45,8 +45,8 @@ describe("DbAuthentication", () => {
       .spyOn(loadAccountByEmailRepositoryStub, "getAccountByEmail")
       .mockImplementationOnce(async () => null as unknown as AccountModel);
     const input = makeFakeInput();
-    const response = await sut.auth(input);
-    expect(response).toBeFalsy();
+    const accessToken = await sut.auth(input);
+    expect(accessToken).toBeFalsy();
   });
   test("Shoul throw if LoadAccountByEmailRepository throws", async () => {
     const { sut, loadAccountByEmailRepositoryStub } = makeSut();

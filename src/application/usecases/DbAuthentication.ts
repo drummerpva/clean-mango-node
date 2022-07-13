@@ -11,6 +11,6 @@ export class DbAuthentication implements Authentication {
       email
     );
     if (!account) return null as unknown as string;
-    return "email";
+    return null as unknown as string;
   }
 }
