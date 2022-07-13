@@ -90,4 +90,12 @@ describe("DbAuthentication", () => {
     const promise = sut.auth(makeFakeInput());
     expect(promise).rejects.toThrow();
   });
+  test("Shoul return null if HashCompare return false", async () => {
+    const { sut, hashComparerStub } = makeSut();
+    jest
+      .spyOn(hashComparerStub, "compare")
+      .mockImplementationOnce(async () => false);
+    const accessToken = await sut.auth(makeFakeInput());
+    expect(accessToken).toBeFalsy();
+  });
 });
