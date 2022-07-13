@@ -4,7 +4,7 @@ import {
   callSuccess,
   serverError,
   unathorized,
-} from "../../helpers/http-helper";
+} from "../../helpers/http/http-helper";
 import { Validation } from "../../helpers/validator/Validation";
 import { Controller, HttpRequest, HttpResponse } from "../../protocols";
 

@@ -10,7 +10,7 @@ import {
   badRequest,
   callSuccess,
   serverError,
-} from "../../../../src/presentation/helpers/http-helper";
+} from "../../../../src/presentation/helpers/http/http-helper";
 import { Validation } from "../../../../src/presentation/helpers/validator/Validation";
 
 type SutType = {

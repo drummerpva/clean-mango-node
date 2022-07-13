@@ -6,7 +6,7 @@ import {
   callSuccess,
   serverError,
   unathorized,
-} from "../../../../src/presentation/helpers/http-helper";
+} from "../../../../src/presentation/helpers/http/http-helper";
 import { Validation } from "../../../../src/presentation/helpers/validator/Validation";
 
 const makeValidation = () => {

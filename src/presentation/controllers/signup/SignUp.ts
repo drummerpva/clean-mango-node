@@ -4,7 +4,7 @@ import {
   badRequest,
   callSuccess,
   serverError,
-} from "../../helpers/http-helper";
+} from "../../helpers/http/http-helper";
 import { Validation } from "../../helpers/validator/Validation";
 import { HttpRequest, HttpResponse } from "./signup-protocols";
 

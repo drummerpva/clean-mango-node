@@ -4,7 +4,7 @@ import { LogControllerDecorator } from "../../../src/main/decorators/LogControll
 import {
   callSuccess,
   serverError,
-} from "../../../src/presentation/helpers/http-helper";
+} from "../../../src/presentation/helpers/http/http-helper";
 import {
   Controller,
   HttpRequest,
