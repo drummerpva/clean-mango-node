@@ -1,5 +1,4 @@
 import { AddAccount } from "../../../domain/usecases/AddAccount";
-import { InvalidParamError } from "../../errors";
 import {
   badRequest,
   callSuccess,

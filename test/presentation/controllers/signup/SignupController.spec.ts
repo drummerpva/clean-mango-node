@@ -1,4 +1,4 @@
-import SignUpController from "../../../../src/presentation/controllers/signup/SignUp";
+import SignUpController from "../../../../src/presentation/controllers/signup/SignUpController";
 import {
   AccountModel,
   AddAccount,
