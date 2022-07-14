@@ -16,6 +16,7 @@ export const MongoHelper = {
     return this.client.db("jest").collection(name);
   },
   map<Result = any>(data: any): Result {
+    if (!data) return null as unknown as Result;
     const { _id, ...dataWithoutId } = data;
     return Object.assign({}, dataWithoutId, { id: _id });
   },
