@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1657676968901" clover="3.2.0">
-  <project timestamp="1657676968902" name="All files">
-    <metrics statements="118" coveredstatements="106" conditionals="11" coveredconditionals="9" methods="31" coveredmethods="30" elements="160" coveredelements="145" complexity="0" loc="118" ncloc="118" packages="11" files="21" classes="21"/>
+<coverage generated="1657763122687" clover="3.2.0">
+  <project timestamp="1657763122687" name="All files">
+    <metrics statements="145" coveredstatements="135" conditionals="13" coveredconditionals="12" methods="38" coveredmethods="38" elements="196" coveredelements="185" complexity="0" loc="145" ncloc="145" packages="11" files="24" classes="24"/>
     <package name="application.usecases">
-      <metrics statements="10" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
+      <metrics statements="23" coveredstatements="19" conditionals="2" coveredconditionals="2" methods="4" coveredmethods="4"/>
       <file name="DbAddAccount-protocols.ts" path="/Users/douglaspoma/Documents/Estudos/clean-tdd-mango/src/application/usecases/DbAddAccount-protocols.ts">
         <metrics statements="4" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="0" type="stmt"/>
@@ -14,16 +14,42 @@
       <file name="DbAddAccount.ts" path="/Users/douglaspoma/Documents/Estudos/clean-tdd-mango/src/application/usecases/DbAddAccount.ts">
         <metrics statements="6" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
         <line num="9" count="5" type="stmt"/>
-        <line num="11" count="9" type="stmt"/>
-        <line num="12" count="9" type="stmt"/>
-        <line num="15" count="6" type="stmt"/>
-        <line num="16" count="5" type="stmt"/>
-        <line num="19" count="4" type="stmt"/>
+        <line num="11" count="10" type="stmt"/>
+        <line num="12" count="10" type="stmt"/>
+        <line num="15" count="7" type="stmt"/>
+        <line num="16" count="6" type="stmt"/>
+        <line num="19" count="5" type="stmt"/>
+      </file>
+      <file name="DbAuthentication.ts" path="/Users/douglaspoma/Documents/Estudos/clean-tdd-mango/src/application/usecases/DbAuthentication.ts">
+        <metrics statements="13" coveredstatements="13" conditionals="2" coveredconditionals="2" methods="2" coveredmethods="2"/>
+        <line num="7" count="5" type="stmt"/>
+        <line num="9" count="16" type="stmt"/>
+        <line num="10" count="16" type="stmt"/>
+        <line num="11" count="16" type="stmt"/>
+        <line num="12" count="16" type="stmt"/>
+        <line num="15" count="14" type="stmt"/>
+        <line num="16" count="14" type="stmt"/>
+        <line num="19" count="13" type="cond" truecount="1" falsecount="0"/>
+        <line num="20" count="11" type="stmt"/>
+        <line num="24" count="10" type="cond" truecount="1" falsecount="0"/>
+        <line num="25" count="9" type="stmt"/>
+        <line num="26" count="8" type="stmt"/>
+        <line num="30" count="7" type="stmt"/>
       </file>
     </package>
     <package name="infra.crypto">
-      <metrics statements="5" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
+      <metrics statements="12" coveredstatements="12" conditionals="0" coveredconditionals="0" methods="5" coveredmethods="5"/>
       <file name="BCryptAdapter.ts" path="/Users/douglaspoma/Documents/Estudos/clean-tdd-mango/src/infra/crypto/BCryptAdapter.ts">
+        <metrics statements="7" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="3"/>
+        <line num="1" count="5" type="stmt"/>
+        <line num="5" count="5" type="stmt"/>
+        <line num="6" count="16" type="stmt"/>
+        <line num="8" count="5" type="stmt"/>
+        <line num="9" count="4" type="stmt"/>
+        <line num="12" count="5" type="stmt"/>
+        <line num="13" count="4" type="stmt"/>
+      </file>
+      <file name="JWTAdapter.ts" path="/Users/douglaspoma/Documents/Estudos/clean-tdd-mango/src/infra/crypto/JWTAdapter.ts">
         <metrics statements="5" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
         <line num="1" count="5" type="stmt"/>
         <line num="4" count="5" type="stmt"/>
@@ -33,14 +59,21 @@
       </file>
     </package>
     <package name="infra.db.mongodb">
-      <metrics statements="9" coveredstatements="9" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
+      <metrics statements="16" coveredstatements="16" conditionals="0" coveredconditionals="0" methods="4" coveredmethods="4"/>
       <file name="MongoAccountRepository.ts" path="/Users/douglaspoma/Documents/Estudos/clean-tdd-mango/src/infra/db/mongodb/MongoAccountRepository.ts">
-        <metrics statements="5" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
-        <line num="4" count="5" type="stmt"/>
-        <line num="6" count="5" type="stmt"/>
-        <line num="8" count="2" type="stmt"/>
-        <line num="9" count="2" type="stmt"/>
-        <line num="10" count="2" type="stmt"/>
+        <metrics statements="12" coveredstatements="12" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="3"/>
+        <line num="1" count="5" type="stmt"/>
+        <line num="7" count="5" type="stmt"/>
+        <line num="9" count="5" type="stmt"/>
+        <line num="16" count="4" type="stmt"/>
+        <line num="17" count="4" type="stmt"/>
+        <line num="18" count="4" type="stmt"/>
+        <line num="24" count="3" type="stmt"/>
+        <line num="25" count="3" type="stmt"/>
+        <line num="26" count="3" type="stmt"/>
+        <line num="27" count="3" type="stmt"/>
+        <line num="30" count="2" type="stmt"/>
+        <line num="31" count="2" type="stmt"/>
       </file>
       <file name="MongoLogRepository.ts" path="/Users/douglaspoma/Documents/Estudos/clean-tdd-mango/src/infra/db/mongodb/MongoLogRepository.ts">
         <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
@@ -51,9 +84,9 @@
       </file>
     </package>
     <package name="infra.db.mongodb.helpers">
-      <metrics statements="11" coveredstatements="9" conditionals="2" coveredconditionals="2" methods="4" coveredmethods="3"/>
+      <metrics statements="12" coveredstatements="12" conditionals="3" coveredconditionals="3" methods="4" coveredmethods="4"/>
       <file name="mongo-helper.ts" path="/Users/douglaspoma/Documents/Estudos/clean-tdd-mango/src/infra/db/mongodb/helpers/mongo-helper.ts">
-        <metrics statements="11" coveredstatements="9" conditionals="2" coveredconditionals="2" methods="4" coveredmethods="3"/>
+        <metrics statements="12" coveredstatements="12" conditionals="3" coveredconditionals="3" methods="4" coveredmethods="4"/>
         <line num="1" count="7" type="stmt"/>
         <line num="2" count="7" type="stmt"/>
         <line num="3" count="7" type="stmt"/>
@@ -61,49 +94,45 @@
         <line num="8" count="5" type="stmt"/>
         <line num="11" count="5" type="cond" truecount="1" falsecount="0"/>
         <line num="12" count="5" type="stmt"/>
-        <line num="15" count="9" type="cond" truecount="1" falsecount="0"/>
-        <line num="16" count="8" type="stmt"/>
-        <line num="19" count="0" type="stmt"/>
-        <line num="20" count="0" type="stmt"/>
+        <line num="15" count="19" type="cond" truecount="1" falsecount="0"/>
+        <line num="16" count="18" type="stmt"/>
+        <line num="19" count="3" type="cond" truecount="1" falsecount="0"/>
+        <line num="20" count="2" type="stmt"/>
+        <line num="21" count="2" type="stmt"/>
       </file>
     </package>
     <package name="presentation.controllers.login">
-      <metrics statements="17" coveredstatements="17" conditionals="3" coveredconditionals="3" methods="2" coveredmethods="2"/>
+      <metrics statements="12" coveredstatements="12" conditionals="2" coveredconditionals="2" methods="2" coveredmethods="2"/>
       <file name="LoginController.ts" path="/Users/douglaspoma/Documents/Estudos/clean-tdd-mango/src/presentation/controllers/login/LoginController.ts">
-        <metrics statements="17" coveredstatements="17" conditionals="3" coveredconditionals="3" methods="2" coveredmethods="2"/>
-        <line num="2" count="1" type="stmt"/>
-        <line num="3" count="1" type="stmt"/>
-        <line num="12" count="1" type="stmt"/>
-        <line num="14" count="9" type="stmt"/>
-        <line num="15" count="9" type="stmt"/>
-        <line num="18" count="9" type="stmt"/>
-        <line num="19" count="9" type="stmt"/>
-        <line num="20" count="9" type="stmt"/>
-        <line num="21" count="17" type="cond" truecount="1" falsecount="0"/>
-        <line num="22" count="2" type="stmt"/>
-        <line num="24" count="7" type="stmt"/>
-        <line num="25" count="7" type="stmt"/>
-        <line num="26" count="6" type="cond" truecount="1" falsecount="0"/>
-        <line num="27" count="5" type="stmt"/>
-        <line num="28" count="4" type="cond" truecount="1" falsecount="0"/>
-        <line num="29" count="3" type="stmt"/>
-        <line num="31" count="2" type="stmt"/>
+        <metrics statements="12" coveredstatements="12" conditionals="2" coveredconditionals="2" methods="2" coveredmethods="2"/>
+        <line num="2" count="5" type="stmt"/>
+        <line num="11" count="5" type="stmt"/>
+        <line num="13" count="10" type="stmt"/>
+        <line num="14" count="10" type="stmt"/>
+        <line num="17" count="8" type="stmt"/>
+        <line num="18" count="8" type="stmt"/>
+        <line num="19" count="8" type="cond" truecount="1" falsecount="0"/>
+        <line num="20" count="7" type="stmt"/>
+        <line num="21" count="7" type="stmt"/>
+        <line num="22" count="6" type="cond" truecount="1" falsecount="0"/>
+        <line num="23" count="4" type="stmt"/>
+        <line num="25" count="1" type="stmt"/>
       </file>
     </package>
     <package name="presentation.controllers.signup">
       <metrics statements="14" coveredstatements="10" conditionals="1" coveredconditionals="1" methods="2" coveredmethods="2"/>
-      <file name="SignUp.ts" path="/Users/douglaspoma/Documents/Estudos/clean-tdd-mango/src/presentation/controllers/signup/SignUp.ts">
+      <file name="SignUpController.ts" path="/Users/douglaspoma/Documents/Estudos/clean-tdd-mango/src/presentation/controllers/signup/SignUpController.ts">
         <metrics statements="10" coveredstatements="10" conditionals="1" coveredconditionals="1" methods="2" coveredmethods="2"/>
-        <line num="3" count="5" type="stmt"/>
-        <line num="11" count="5" type="stmt"/>
-        <line num="12" count="9" type="stmt"/>
+        <line num="2" count="5" type="stmt"/>
+        <line num="10" count="5" type="stmt"/>
+        <line num="11" count="9" type="stmt"/>
+        <line num="13" count="6" type="stmt"/>
         <line num="14" count="6" type="stmt"/>
-        <line num="15" count="6" type="stmt"/>
-        <line num="16" count="6" type="cond" truecount="1" falsecount="0"/>
+        <line num="15" count="6" type="cond" truecount="1" falsecount="0"/>
+        <line num="16" count="5" type="stmt"/>
         <line num="17" count="5" type="stmt"/>
-        <line num="18" count="5" type="stmt"/>
-        <line num="19" count="4" type="stmt"/>
-        <line num="21" count="1" type="stmt"/>
+        <line num="18" count="4" type="stmt"/>
+        <line num="20" count="1" type="stmt"/>
       </file>
       <file name="signup-protocols.ts" path="/Users/douglaspoma/Documents/Estudos/clean-tdd-mango/src/presentation/controllers/signup/signup-protocols.ts">
         <metrics statements="4" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
@@ -117,50 +146,50 @@
       <metrics statements="17" coveredstatements="17" conditionals="1" coveredconditionals="0" methods="4" coveredmethods="4"/>
       <file name="InvalidParamError.ts" path="/Users/douglaspoma/Documents/Estudos/clean-tdd-mango/src/presentation/errors/InvalidParamError.ts">
         <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
-        <line num="1" count="11" type="stmt"/>
-        <line num="3" count="6" type="stmt"/>
-        <line num="4" count="6" type="stmt"/>
+        <line num="1" count="12" type="stmt"/>
+        <line num="3" count="4" type="stmt"/>
+        <line num="4" count="4" type="stmt"/>
       </file>
       <file name="MissingParamError.ts" path="/Users/douglaspoma/Documents/Estudos/clean-tdd-mango/src/presentation/errors/MissingParamError.ts">
         <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
-        <line num="1" count="11" type="stmt"/>
+        <line num="1" count="12" type="stmt"/>
         <line num="3" count="8" type="stmt"/>
         <line num="4" count="8" type="stmt"/>
       </file>
       <file name="ServerError.ts" path="/Users/douglaspoma/Documents/Estudos/clean-tdd-mango/src/presentation/errors/ServerError.ts">
         <metrics statements="4" coveredstatements="4" conditionals="1" coveredconditionals="0" methods="1" coveredmethods="1"/>
-        <line num="1" count="11" type="stmt"/>
-        <line num="3" count="7" type="stmt"/>
-        <line num="4" count="7" type="stmt"/>
-        <line num="5" count="7" type="stmt"/>
+        <line num="1" count="12" type="stmt"/>
+        <line num="3" count="5" type="stmt"/>
+        <line num="4" count="5" type="stmt"/>
+        <line num="5" count="5" type="stmt"/>
       </file>
       <file name="UnauthorizedError.ts" path="/Users/douglaspoma/Documents/Estudos/clean-tdd-mango/src/presentation/errors/UnauthorizedError.ts">
         <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
-        <line num="1" count="11" type="stmt"/>
-        <line num="3" count="2" type="stmt"/>
-        <line num="4" count="2" type="stmt"/>
+        <line num="1" count="12" type="stmt"/>
+        <line num="3" count="3" type="stmt"/>
+        <line num="4" count="3" type="stmt"/>
       </file>
       <file name="index.ts" path="/Users/douglaspoma/Documents/Estudos/clean-tdd-mango/src/presentation/errors/index.ts">
         <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="1" count="11" type="stmt"/>
-        <line num="2" count="11" type="stmt"/>
-        <line num="3" count="11" type="stmt"/>
-        <line num="4" count="11" type="stmt"/>
+        <line num="1" count="12" type="stmt"/>
+        <line num="2" count="12" type="stmt"/>
+        <line num="3" count="12" type="stmt"/>
+        <line num="4" count="12" type="stmt"/>
       </file>
     </package>
-    <package name="presentation.helpers">
+    <package name="presentation.helpers.http">
       <metrics statements="5" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="4" coveredmethods="4"/>
-      <file name="http-helper.ts" path="/Users/douglaspoma/Documents/Estudos/clean-tdd-mango/src/presentation/helpers/http-helper.ts">
+      <file name="http-helper.ts" path="/Users/douglaspoma/Documents/Estudos/clean-tdd-mango/src/presentation/helpers/http/http-helper.ts">
         <metrics statements="5" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="4" coveredmethods="4"/>
         <line num="1" count="7" type="stmt"/>
-        <line num="4" count="8" type="stmt"/>
+        <line num="4" count="7" type="stmt"/>
         <line num="8" count="7" type="stmt"/>
         <line num="12" count="7" type="stmt"/>
-        <line num="16" count="12" type="stmt"/>
+        <line num="16" count="13" type="stmt"/>
       </file>
     </package>
     <package name="presentation.helpers.validator">
-      <metrics statements="25" coveredstatements="25" conditionals="4" coveredconditionals="3" methods="8" coveredmethods="8"/>
+      <metrics statements="29" coveredstatements="29" conditionals="4" coveredconditionals="4" methods="8" coveredmethods="8"/>
       <file name="CompareFieldsValidation.ts" path="/Users/douglaspoma/Documents/Estudos/clean-tdd-mango/src/presentation/helpers/validator/CompareFieldsValidation.ts">
         <metrics statements="7" coveredstatements="7" conditionals="1" coveredconditionals="1" methods="2" coveredmethods="2"/>
         <line num="1" count="6" type="stmt"/>
@@ -175,28 +204,35 @@
         <metrics statements="7" coveredstatements="7" conditionals="1" coveredconditionals="1" methods="2" coveredmethods="2"/>
         <line num="1" count="6" type="stmt"/>
         <line num="5" count="6" type="stmt"/>
-        <line num="7" count="9" type="stmt"/>
-        <line num="8" count="9" type="stmt"/>
-        <line num="11" count="4" type="cond" truecount="1" falsecount="0"/>
+        <line num="7" count="13" type="stmt"/>
+        <line num="8" count="13" type="stmt"/>
+        <line num="11" count="6" type="cond" truecount="1" falsecount="0"/>
         <line num="12" count="1" type="stmt"/>
-        <line num="13" count="2" type="stmt"/>
+        <line num="13" count="4" type="stmt"/>
       </file>
       <file name="RequiredFIeldValidation.ts" path="/Users/douglaspoma/Documents/Estudos/clean-tdd-mango/src/presentation/helpers/validator/RequiredFIeldValidation.ts">
         <metrics statements="5" coveredstatements="5" conditionals="1" coveredconditionals="1" methods="2" coveredmethods="2"/>
         <line num="1" count="6" type="stmt"/>
         <line num="4" count="6" type="stmt"/>
-        <line num="5" count="26" type="stmt"/>
-        <line num="7" count="6" type="cond" truecount="1" falsecount="0"/>
-        <line num="8" count="5" type="stmt"/>
+        <line num="5" count="34" type="stmt"/>
+        <line num="7" count="10" type="cond" truecount="1" falsecount="0"/>
+        <line num="8" count="9" type="stmt"/>
       </file>
       <file name="ValidationComposite.ts" path="/Users/douglaspoma/Documents/Estudos/clean-tdd-mango/src/presentation/helpers/validator/ValidationComposite.ts">
-        <metrics statements="6" coveredstatements="6" conditionals="1" coveredconditionals="0" methods="2" coveredmethods="2"/>
+        <metrics statements="6" coveredstatements="6" conditionals="1" coveredconditionals="1" methods="2" coveredmethods="2"/>
+        <line num="3" count="6" type="stmt"/>
+        <line num="4" count="11" type="stmt"/>
+        <line num="6" count="6" type="stmt"/>
+        <line num="7" count="17" type="stmt"/>
+        <line num="8" count="17" type="cond" truecount="1" falsecount="0"/>
+        <line num="10" count="4" type="stmt"/>
+      </file>
+      <file name="index.ts" path="/Users/douglaspoma/Documents/Estudos/clean-tdd-mango/src/presentation/helpers/validator/index.ts">
+        <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="5" type="stmt"/>
+        <line num="2" count="5" type="stmt"/>
         <line num="3" count="5" type="stmt"/>
-        <line num="4" count="4" type="stmt"/>
-        <line num="6" count="1" type="stmt"/>
-        <line num="7" count="6" type="stmt"/>
-        <line num="8" count="6" type="cond" truecount="0" falsecount="1"/>
-        <line num="10" count="1" type="stmt"/>
+        <line num="4" count="5" type="stmt"/>
       </file>
     </package>
     <package name="presentation.protocols">
@@ -213,7 +249,7 @@
         <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
         <line num="1" count="6" type="stmt"/>
         <line num="4" count="6" type="stmt"/>
-        <line num="6" count="4" type="stmt"/>
+        <line num="6" count="6" type="stmt"/>
       </file>
     </package>
   </project>
